@@ -5,19 +5,19 @@ fi
 # user_color to red for root users
 test $UID -eq 0 && user_color='red'
 
-# SSH Indicator
-if [ -n "$SSH_CONNECTION" ]; then
-    if [ -n "$RPS1" ]; then
-        # decoupling workaround
-        RPROMPT=$RPS1
-    fi
-    if [[ ! $RPROMPT =~ '$(ssh_indicator)' ]]; then
-        RPROMPT=$RPROMPT'$(ssh_indicator)'
-    fi
-fi
-function ssh_indicator() {
-    test -n "$SSH_CONNECTION" && echo "%K{$user_color} $USER@$HOST %k"
-}
+# # SSH Indicator -- this can cause some performance issues
+# if [ -n "$SSH_CONNECTION" ]; then
+#     if [ -n "$RPS1" ]; then
+#         # decoupling workaround
+#         RPROMPT=$RPS1
+#     fi
+#     if [[ ! $RPROMPT =~ '$(ssh_indicator)' ]]; then
+#         RPROMPT=$RPROMPT'$(ssh_indicator)'
+#     fi
+# fi
+# function ssh_indicator() {
+#     test -n "$SSH_CONNECTION" && echo "%K{$user_color} $USER@$HOST %k"
+# }
 
 PROMPT='%(?..%{$fg_bold[red]%}exit %?
 %{$reset_color%})'\
